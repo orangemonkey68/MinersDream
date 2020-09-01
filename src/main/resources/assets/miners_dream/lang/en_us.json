@@ -1,0 +1,19 @@
+{
+  "item.miners_dream.iron_prospecting_pick": "Iron Prospecting Pick",
+  "item.miners_dream.gold_prospecting_pick": "Gold Prospecting Pick",
+  "item.miners_dream.diamond_prospecting_pick": "Diamond Prospecting Pick",
+  "item.miners_dream.netherite_prospecting_pick": "Netherite Prospecting Pick",
+
+  "chat.miners_dream.nothing": "No traces found",
+  "chat.miners_dream.trace": "Found a trace of %s",
+  "chat.miners_dream.small": "Found a small deposit of %s",
+  "chat.miners_dream.medium": "Found a medium deposit of %s",
+  "chat.miners_dream.large": "Found a large deposit of %s",
+  "chat.miners_dream.motherload": "Found a motherload of %s",
+
+  "chat.miners_dream.bound_translocation_stone": "This stone is bound to the inventory at %d, %d, %d",
+  "chat.miners_dream.unbound_translocation_stone": "This stone had been unbound.",
+  "item.miners_dream.translocation_stone": "Translocation Stone",
+  "item.miners_dream.translocation_stone.tooltip_bound": "Bound to %d, %d, %d",
+  "item.miners_dream.translocation_stone.tooltip_unbound": "Not bound"
+}
