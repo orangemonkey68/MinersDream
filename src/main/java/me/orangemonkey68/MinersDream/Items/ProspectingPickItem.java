@@ -62,9 +62,7 @@ public class ProspectingPickItem extends ToolItem {
                     player.sendMessage(new TranslatableText("chat.miners_dream.nothing"), false);
                 }else {
                     freqMap.forEach((block, i) -> {
-                        float percentComposition = ((float) i / (float) fetchedBlocks.size()) * 100;
-                        System.out.println(block.getName().getString());
-                        player.sendMessage(getTextToSend(percentComposition, block.getName().getString()), false);
+                        player.sendMessage(getTextToSend(i, block.getName().getString()), false);
                     });
                 }
 
@@ -101,15 +99,17 @@ public class ProspectingPickItem extends ToolItem {
     public Text getTextToSend(float count, String ore) {
         ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
-        if (count >= config.smallPercent && count < config.mediumPercent) {
+        System.out.println("Ore: " + ore + ", count: " + count);
+
+        if (count >= config.smallCount && count < config.mediumCount) {
             return new TranslatableText("chat.miners_dream.small", ore);
-        } else if (count >= config.mediumPercent && count < config.largePercent) {
+        } else if (count >= config.mediumCount && count < config.largeCount) {
             return new TranslatableText("chat.miners_dream.medium", ore);
-        } else if (count >= config.largePercent && count < config.motherload) {
+        } else if (count >= config.largeCount && count < config.motherload) {
             return new TranslatableText("chat.miners_dream.large", ore);
         } else if (count >= config.motherload) {
             return new TranslatableText("chat.miners_dream.motherload", ore);
-        }else if (count >= 0 && count < config.smallPercent){
+        }else if (count >= 0 && count < config.smallCount){
             return new TranslatableText("chat.miners_dream.trace", ore);
         } else {
             return new LiteralText("An error occurred");
