@@ -13,6 +13,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class MinersDreamMod implements ModInitializer {
     public final ProspectingPickItem netheritePick = new ProspectingPickItem(ProspectingPickMaterial.NETHERITE, new Item.Settings().group(ItemGroup.TOOLS));
     public final CircleDebugItem circleDebugItem = new CircleDebugItem(new Item.Settings().group(ItemGroup.TOOLS));
 
-    public final TranslocationStoneItem translocationStoneItem = new TranslocationStoneItem(new Item.Settings().group(ItemGroup.TOOLS));
+    public final TranslocationStoneItem translocationStoneItem = new TranslocationStoneItem(new Item.Settings().group(ItemGroup.TOOLS).maxCount(1).rarity(Rarity.RARE));
 
     void registerItems(){
         Registry.register(Registry.ITEM, new Identifier("miners_dream", "circle_test_item"), circleDebugItem);
