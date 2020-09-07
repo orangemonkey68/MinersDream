@@ -29,7 +29,9 @@
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": "1.16.x"
+    "minecraft": "1.16.x",
+    "cloth-config2": ">=4.7.0-unstable",
+    "autoconfig1u": ">=3.2.0-unstable"
   },
   "suggests": {
     "flamingo": "*"

@@ -60,6 +60,6 @@ public class MinersDreamMod implements ModInitializer {
         Registry.register(Registry.ITEM, new Identifier("miners_dream", "gold_prospecting_pick"), goldPick);
         Registry.register(Registry.ITEM, new Identifier("miners_dream", "diamond_prospecting_pick"), diamondPick);
         Registry.register(Registry.ITEM, new Identifier("miners_dream", "netherite_prospecting_pick"), netheritePick);
-        Registry.register(Registry.ITEM, new Identifier("miners_dream", "translocation_stone_item"), translocationStoneItem);
+        Registry.register(Registry.ITEM, new Identifier("miners_dream", "translocation_stone"), translocationStoneItem);
     }
 }
