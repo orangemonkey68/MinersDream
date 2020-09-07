@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IS ",
+    " S "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "miners_dream:gold_prospecting_pick",
+    "count": 1
+  }
+}

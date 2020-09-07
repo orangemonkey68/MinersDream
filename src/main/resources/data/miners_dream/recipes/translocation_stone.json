@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EPE",
+    "PDP",
+    "EPE"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "P": {
+      "item": "minecraft:blaze_powder"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "miners_dream:translocation_stone",
+    "count": 1
+  }
+}
