@@ -9,6 +9,7 @@ import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -18,26 +19,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MinersDreamMod implements ModInitializer {
-    private List<Block> ores = new ArrayList<>();
-
+    public static List<Block> oreBlocks = new ArrayList<>();
+    public static List<Item> oreItems = new ArrayList<>();
 
     @Override
     public void onInitialize() {
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
-        ores = getAllOres();
+        initializeOreLists(oreBlocks, oreItems);
         registerItems();
     }
 
-    private List<Block> getAllOres(){
-        List<Block> blockList = new ArrayList<>();
-
-        Registry.BLOCK.forEach(block -> {
-            String name = block.getName().getString();
-            if(name.contains("ore") || name.contains("Ore")){
-                blockList.add(block);
+    //Because there's no "ores" tag within the game, this checks if each Item is
+    //1) a block item
+    //2) contains "ore"
+    //3) does NOT have a block entity.
+    // I'm aware this method isn't foolproof, but I have yet to find a better solution.
+    private void initializeOreLists(List<Block> blocks, List<Item> items){
+        Registry.ITEM.forEach(item -> {
+            if(item instanceof BlockItem && item.getName().getString().toLowerCase().contains("ore")){
+                BlockItem blockItem = (BlockItem) item;
+                if(!blockItem.getBlock().hasBlockEntity()){
+                    items.add(item);
+                    blocks.add(blockItem.getBlock());
+                }
             }
         });
-        return blockList;
     }
 
     public final ProspectingPickItem ironPick = new ProspectingPickItem(ProspectingPickMaterial.IRON, new Item.Settings().group(ItemGroup.TOOLS));

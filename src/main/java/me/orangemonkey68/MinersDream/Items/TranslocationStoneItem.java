@@ -1,30 +1,22 @@
 package me.orangemonkey68.MinersDream.Items;
 
-import net.fabricmc.fabric.mixin.resource.loader.MixinKeyedResourceReloadListener;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.InventoryProvider;
-import net.minecraft.block.entity.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.lwjgl.system.CallbackI;
 
-import java.util.Collections;
 import java.util.List;
 
-//TODO: Unbind logic
 //TODO: Find a way to listen for items in the player's inv, add teleport logic.
 
 public class TranslocationStoneItem extends Item {
@@ -96,9 +88,7 @@ public class TranslocationStoneItem extends Item {
         }else return false;
     }
 
-
-
-    Inventory getBoundInventory(){
+    public Inventory getBoundInventory(){
         return boundInventory;
     }
 

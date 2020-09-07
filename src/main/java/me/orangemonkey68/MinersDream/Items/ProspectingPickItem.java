@@ -1,5 +1,6 @@
 package me.orangemonkey68.MinersDream.Items;
 
+import me.orangemonkey68.MinersDream.MinersDreamMod;
 import me.orangemonkey68.MinersDream.config.ModConfig;
 import me.orangemonkey68.MinersDream.util.sphere.SphereUtil;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-//TODO: implement this cache for spheres https://hastebin.com/nagevilavu.md
 
 public class ProspectingPickItem extends ToolItem {
     private final int radius;
@@ -28,7 +28,7 @@ public class ProspectingPickItem extends ToolItem {
     public ProspectingPickItem(ProspectingPickMaterial material, Settings settings) {
         super(material, settings);
         this.radius = material.getRadius();
-        this.ores = getAllOres();
+        this.ores = MinersDreamMod.oreBlocks;
     }
 
 
@@ -61,9 +61,7 @@ public class ProspectingPickItem extends ToolItem {
                 if(freqMap.isEmpty()){
                     player.sendMessage(new TranslatableText("chat.miners_dream.nothing"), false);
                 }else {
-                    freqMap.forEach((block, i) -> {
-                        player.sendMessage(getTextToSend(i, block.getName().getString()), false);
-                    });
+                    freqMap.forEach((block, i) -> player.sendMessage(getTextToSend(i, block.getName().getString()), false));
                 }
 
                 //damage tool
@@ -94,8 +92,7 @@ public class ProspectingPickItem extends ToolItem {
         return blockList;
     }
 
-    //TODO: Set up AutoConfig and configurable thresholds
-    //levels: NOTHING, TRACE, SMALLSAMPLE, MEDIUMSAMPLE, LARGESAMPLE, MOTHERLOAD
+
     public Text getTextToSend(float count, String ore) {
         ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 

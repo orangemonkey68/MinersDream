@@ -13,6 +13,7 @@
 
   "chat.miners_dream.bound_translocation_stone": "This stone is bound to the inventory at %d, %d, %d",
   "chat.miners_dream.unbound_translocation_stone": "This stone had been unbound.",
+  "chat.miners_dream.too_many_translocation_stones": "You have %d stones in your inventory, but you can only use one.",
   "item.miners_dream.translocation_stone": "Translocation Stone",
   "item.miners_dream.translocation_stone.tooltip_bound": "Bound to %d, %d, %d",
   "item.miners_dream.translocation_stone.tooltip_unbound": "Not bound"

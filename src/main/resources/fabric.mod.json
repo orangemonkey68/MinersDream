@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-
+      "miners_dream.mixins.json"
   ],
 
   "depends": {
