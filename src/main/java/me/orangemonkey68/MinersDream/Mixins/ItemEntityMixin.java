@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,9 +39,12 @@ public class ItemEntityMixin {
                 } else {
                     ItemStack stack = ((ItemEntity)(Object)this).getStack();
 
+                    //TODO: check if stone is bound
+
                     TranslocationStoneItem stone = (TranslocationStoneItem)translocatorList.get(0).getItem();
                     if(MinersDreamMod.oreItems.contains(stack.getItem())){
-                        if(InventoryUtil.insertStack(stack, stone.getBoundInventory()) == ItemStack.EMPTY){
+                        //IDE might yell at us saying this is an unchecked cast, but it's checked in the method we're injecting into.
+                        if(InventoryUtil.insertStack(stack, stone.getBoundInventory((ServerWorld) player.world, translocatorList.get(0))) == ItemStack.EMPTY){
                             InventoryUtil.removeCountOfItem(stack.getCount(), stack.getItem(), serverPlayer.inventory);
                         }
                     }

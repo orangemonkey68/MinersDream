@@ -1,7 +1,6 @@
 package me.orangemonkey68.MinersDream.Items;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,6 +8,8 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -25,11 +26,8 @@ import java.util.List;
 public class TranslocationStoneItem extends Item {
     public TranslocationStoneItem(Settings settings) {
         super(settings);
-        tooltip = new TranslatableText("item.miners_dream.translocation_stone.tooltip_unbound");
     }
 
-    private Inventory boundInventory;
-    private TranslatableText tooltip;
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
@@ -37,66 +35,75 @@ public class TranslocationStoneItem extends Item {
         PlayerEntity player = context.getPlayer();
         BlockPos pos = context.getBlockPos();
         Block block = world.getBlockState(pos).getBlock();
+        ItemStack stack = context.getStack();
+
+        //TODO: rewrite this to put loc of inventory in an NBT tag, use that to get an inv and send the item
 
         if(!world.isClient()) {
-            Inventory inventory = (Inventory) world.getBlockEntity(pos);
+            CompoundTag tag = stack.getOrCreateTag();
+            boolean isBound = tag.getBoolean("isBound");
 
-            if(this.boundInventory != null && this.boundInventory == inventory){
-                //unbidning logic
-                this.boundInventory = null;
-                this.tooltip = new TranslatableText("item.miners_dream.translocation_stone.tooltip_unbound");
+            if(block.hasBlockEntity()){
+                BlockEntity blockEntity = world.getBlockEntity(pos);
+                if(blockEntity instanceof Inventory){
+                    if(isBound){
+                        //unbinding logic
+                        tag.putBoolean("isBound", false);
+                        if(player != null){
+                            player.sendMessage(new TranslatableText("chat.miners_dream.unbound_translocation_stone"), false);
+                        }
+                    } else {
+                        //binding logic
+                        tag.putBoolean("isBound", true);
 
-                if(player != null){
-                    player.sendMessage(new TranslatableText("chat.miners_dream.unbound_translocation_stone"), false);
-                }
+                        tag.putDouble("x", pos.getX());
+                        tag.putDouble("y", pos.getY());
+                        tag.putDouble("z", pos.getZ());
 
-                return ActionResult.SUCCESS;
+                        if(player != null){
+                            player.sendMessage(new TranslatableText("chat.miners_dream.bound_translocation_stone", pos.getX(), pos.getY(), pos.getZ()), false);
+                        }
+                    }
+                    return ActionResult.SUCCESS;
 
-            } else if (inventory != null){
-                //Binding logic
-                this.boundInventory = inventory;
-                this.tooltip = new TranslatableText("item.miners_dream.translocation_stone.tooltip_bound", pos.getX(), pos.getY(), pos.getZ());
-
-                if(player != null){
-                    player.sendMessage(new TranslatableText("chat.miners_dream.bound_translocation_stone", pos.getX(), pos.getY(), pos.getZ()), false);
-                }
-
-                return ActionResult.SUCCESS;
+                } else return ActionResult.FAIL;
             } else return ActionResult.FAIL;
-
 
         } else return ActionResult.PASS;
     }
 
-    public void bindInventory(Inventory inventory){
-        this.boundInventory = inventory;
-    }
+    public Inventory getBoundInventory(ServerWorld world, ItemStack translocator){
+        if(!world.isClient){
+            CompoundTag tag = translocator.getOrCreateTag();
+            boolean isBound = tag.getBoolean("isBound");
+            if(isBound){
+                double x = tag.getDouble("x");
+                double y = tag.getDouble("y");
+                double z = tag.getDouble("z");
+                BlockPos pos = new BlockPos(x, y, z);
 
-    public boolean bindInventory(BlockPos pos, World world){
-        BlockState state = world.getBlockState(pos);
-        Block block = state.getBlock();
-
-        if(block.hasBlockEntity()){
-            BlockEntity entity = world.getBlockEntity(pos);
-            Inventory inventory = (Inventory)entity;
-            if(inventory != null){
-                //set bound inv
-                this.boundInventory = inventory;
-
-                //Change tooltip
-                this.tooltip = new TranslatableText("item.miners_dream.translocation_stone.tooltip_bound");
-
-                return true;
-            } else return false;
-        }else return false;
-    }
-
-    public Inventory getBoundInventory(){
-        return boundInventory;
+                if(world.getBlockState(pos).getBlock().hasBlockEntity()){
+                    BlockEntity blockEntity = world.getBlockEntity(pos);
+                    if(blockEntity instanceof Inventory){
+                        return (Inventory)blockEntity;
+                    } else return null;
+                } else return null;
+            }else return null;
+        }else return null;
     }
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(this.tooltip);
+        CompoundTag tag = stack.getOrCreateTag();
+        boolean isBound = tag.getBoolean("isBound");
+        if(isBound){
+            double x = tag.getDouble("x");
+            double y = tag.getDouble("y");
+            double z = tag.getDouble("z");
+
+            tooltip.add(new TranslatableText("item.miners_dream.translocation_stone.tooltip_bound", x, y, z));
+        } else {
+            tooltip.add(new TranslatableText("item.miners_dream.translocation_stone.tooltip_unbound"));
+        }
     }
 }
