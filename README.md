@@ -6,8 +6,8 @@ Miners Dream adds all sorts of mining-related items to minecraft. They're all de
 ### Dependencies
 Miners dream depends on 
 - Fabric API
-- \>=4.7.0-unstable
-- \>=3.2.0-unstable
+- Cloth Config \>= v4.7.0-unstable
+- Auto Config \>= v3.2.0-unstable
 
 ### Modpack Permissions
 - You **are** 100% welcome to include my mod in modpacks, as long as you give me credit for it!
