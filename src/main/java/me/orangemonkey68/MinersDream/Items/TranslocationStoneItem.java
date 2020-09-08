@@ -51,7 +51,10 @@ public class TranslocationStoneItem extends Item {
                         }
                     } else {
                         //binding logic
+
                         tag.putBoolean("isBound", true);
+
+                        tag.putString("worldId", world.getRegistryKey().getValue().toString());
 
                         tag.putDouble("x", pos.getX());
                         tag.putDouble("y", pos.getY());
@@ -71,7 +74,6 @@ public class TranslocationStoneItem extends Item {
 
     public Inventory getBoundInventory(ServerWorld world, ItemStack translocator){
         if(!world.isClient){
-            System.out.println(world.toString());
 
             CompoundTag tag = translocator.getOrCreateTag();
             boolean isBound = tag.getBoolean("isBound");

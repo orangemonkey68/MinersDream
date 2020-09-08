@@ -15,25 +15,21 @@ public class InventoryUtil {
             ItemStack currentStack = to.getStack(i);
 
             if(currentStack.isEmpty()){
-                System.out.println("stack was empty");
 
                 to.setStack(i, stack);
                 return ItemStack.EMPTY;
             } else if (currentStack.getItem() == stack.getItem()){
                 if (currentStack.getCount() + stack.getCount() <= currentStack.getMaxCount()){
-                    System.out.println("adding stacks together");
                     currentStack.setCount(currentStack.getCount() + stack.getCount());
-                    to.setStack(i, stack);
+                    to.setStack(i, currentStack);
                     return ItemStack.EMPTY;
                 } else if (!(currentStack.getCount() == currentStack.getMaxCount()) && currentStack.getCount() + stack.getCount() < currentStack.getMaxCount()){
-                    System.out.println("stacks more than max");
                     int remainder = currentStack.getCount() + stack.getCount() - currentStack.getMaxCount();
                     currentStack.setCount(remainder);
 
                     currentStack.setCount(currentStack.getMaxCount());
                     to.setStack(i, currentStack);
 
-                    System.out.println("RECURSIVE CALL");
                     return insertStack(stack, to);
                 }
             }
