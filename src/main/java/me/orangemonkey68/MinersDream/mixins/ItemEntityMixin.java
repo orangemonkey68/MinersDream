@@ -1,8 +1,8 @@
-package me.orangemonkey68.MinersDream.Mixins;
+package me.orangemonkey68.MinersDream.mixins;
 
 import com.google.common.collect.ImmutableList;
-import me.orangemonkey68.MinersDream.Items.TranslocationStoneItem;
 import me.orangemonkey68.MinersDream.MinersDreamMod;
+import me.orangemonkey68.MinersDream.items.TranslocationStoneItem;
 import me.orangemonkey68.MinersDream.util.inventory.InventoryUtil;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -48,8 +48,6 @@ public class ItemEntityMixin {
                     boolean isBound = tag.getBoolean("isBound");
                     String worldId = tag.getString("worldId");
 
-
-
                     MinecraftServer server = player.getServer();
                     RegistryKey<World> worldRegistryKey = null;
                     if(server != null){
@@ -73,8 +71,6 @@ public class ItemEntityMixin {
             }
         }
     }
-
-
 
     List<ItemStack> getAllTranslocationStones(PlayerInventory inv){
         List<DefaultedList<ItemStack>> combinedInventory = ImmutableList.of(inv.main, inv.offHand);

@@ -1,10 +1,10 @@
 package me.orangemonkey68.MinersDream;
 
-import me.orangemonkey68.MinersDream.Items.CircleDebugItem;
-import me.orangemonkey68.MinersDream.Items.ProspectingPickItem;
-import me.orangemonkey68.MinersDream.Items.ProspectingPickMaterial;
-import me.orangemonkey68.MinersDream.Items.TranslocationStoneItem;
 import me.orangemonkey68.MinersDream.config.ModConfig;
+import me.orangemonkey68.MinersDream.items.CircleDebugItem;
+import me.orangemonkey68.MinersDream.items.ProspectingPickItem;
+import me.orangemonkey68.MinersDream.items.ProspectingPickMaterial;
+import me.orangemonkey68.MinersDream.items.TranslocationStoneItem;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;

@@ -1,4 +1,4 @@
-package me.orangemonkey68.MinersDream.Items;
+package me.orangemonkey68.MinersDream.items;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;

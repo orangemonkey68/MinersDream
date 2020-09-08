@@ -1,4 +1,4 @@
-package me.orangemonkey68.MinersDream.Items;
+package me.orangemonkey68.MinersDream.items;
 
 import me.orangemonkey68.MinersDream.MinersDreamMod;
 import me.orangemonkey68.MinersDream.config.ModConfig;

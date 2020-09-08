@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "me.orangemonkey68.MinersDream.Mixins",
+  "package": "me.orangemonkey68.MinersDream.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ItemEntityMixin"
