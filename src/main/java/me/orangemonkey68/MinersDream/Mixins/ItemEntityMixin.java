@@ -8,6 +8,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.TranslatableText;
@@ -39,10 +40,14 @@ public class ItemEntityMixin {
                 } else {
                     ItemStack stack = ((ItemEntity)(Object)this).getStack();
 
-                    //TODO: check if stone is bound
+                    System.out.println(stack.getCount());
+
+                    ItemStack stoneStack = translocatorList.get(0);
+                    CompoundTag tag = stoneStack.getOrCreateTag();
+                    boolean isBound = tag.getBoolean("isBound");
 
                     TranslocationStoneItem stone = (TranslocationStoneItem)translocatorList.get(0).getItem();
-                    if(MinersDreamMod.oreItems.contains(stack.getItem())){
+                    if(MinersDreamMod.oreItems.contains(stack.getItem()) && isBound){
                         //IDE might yell at us saying this is an unchecked cast, but it's checked in the method we're injecting into.
                         if(InventoryUtil.insertStack(stack, stone.getBoundInventory((ServerWorld) player.world, translocatorList.get(0))) == ItemStack.EMPTY){
                             InventoryUtil.removeCountOfItem(stack.getCount(), stack.getItem(), serverPlayer.inventory);

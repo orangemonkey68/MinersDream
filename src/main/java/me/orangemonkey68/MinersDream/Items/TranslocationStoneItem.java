@@ -18,9 +18,6 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-//TODO: store inv location instead of inv itself
-//TODO: Use NBT tag for serialized info
-
 //Current issue: Item is not instantiated per itemstack. Because of this, I need to not store info in the item class.
 
 public class TranslocationStoneItem extends Item {
@@ -74,6 +71,8 @@ public class TranslocationStoneItem extends Item {
 
     public Inventory getBoundInventory(ServerWorld world, ItemStack translocator){
         if(!world.isClient){
+            System.out.println(world.toString());
+
             CompoundTag tag = translocator.getOrCreateTag();
             boolean isBound = tag.getBoolean("isBound");
             if(isBound){

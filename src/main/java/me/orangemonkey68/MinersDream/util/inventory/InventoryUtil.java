@@ -15,20 +15,25 @@ public class InventoryUtil {
             ItemStack currentStack = to.getStack(i);
 
             if(currentStack.isEmpty()){
+                System.out.println("stack was empty");
+
                 to.setStack(i, stack);
                 return ItemStack.EMPTY;
             } else if (currentStack.getItem() == stack.getItem()){
                 if (currentStack.getCount() + stack.getCount() <= currentStack.getMaxCount()){
-                    stack.setCount(currentStack.getCount() + stack.getCount());
+                    System.out.println("adding stacks together");
+                    currentStack.setCount(currentStack.getCount() + stack.getCount());
                     to.setStack(i, stack);
                     return ItemStack.EMPTY;
                 } else if (!(currentStack.getCount() == currentStack.getMaxCount()) && currentStack.getCount() + stack.getCount() < currentStack.getMaxCount()){
+                    System.out.println("stacks more than max");
                     int remainder = currentStack.getCount() + stack.getCount() - currentStack.getMaxCount();
-                    stack.setCount(remainder);
+                    currentStack.setCount(remainder);
 
                     currentStack.setCount(currentStack.getMaxCount());
                     to.setStack(i, currentStack);
 
+                    System.out.println("RECURSIVE CALL");
                     return insertStack(stack, to);
                 }
             }
@@ -37,20 +42,21 @@ public class InventoryUtil {
         return stack;
     }
 
-    public static void removeCountOfItem(int count, Item item, Inventory inv){
+    public static void removeCountOfItem(int countToRemove, Item item, Inventory inv){
+
         for(int i = 0; i < inv.size(); i++){
             ItemStack currentStack = inv.getStack(i);
-
             if(currentStack.getItem() == item){
-                if(currentStack.getCount() - count == 0){
+                if(currentStack.getCount() == countToRemove){
                     inv.removeStack(i);
+                    countToRemove = 0;
                     return;
-                } else if(currentStack.getCount() > count){
-                    currentStack.setCount(currentStack.getCount() - count);
+                } else if (currentStack.getCount() > countToRemove){
+                    currentStack.setCount(currentStack.getCount() - countToRemove);
                     inv.setStack(i, currentStack);
                     return;
                 } else {
-                    count = count - currentStack.getCount();
+                    countToRemove = countToRemove - currentStack.getCount();
                     inv.removeStack(i);
                 }
             }
