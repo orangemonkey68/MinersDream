@@ -64,13 +64,11 @@ public class ItemEntityMixin {
         List<DefaultedList<ItemStack>> combinedInventory = ImmutableList.of(inv.main, inv.offHand);
         List<ItemStack> translocationStones = new ArrayList<>();
 
-        combinedInventory.forEach(list -> {
-            list.forEach(itemStack -> {
-                if(itemStack.getItem() instanceof TranslocationStoneItem){
-                    translocationStones.add(itemStack);
-                }
-            });
-        });
+        combinedInventory.forEach(list -> list.forEach(itemStack -> {
+            if(itemStack.getItem() instanceof TranslocationStoneItem){
+                translocationStones.add(itemStack);
+            }
+        }));
 
         return translocationStones;
     }

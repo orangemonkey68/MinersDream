@@ -49,7 +49,6 @@ public class InventoryUtil {
             if(currentStack.getItem() == item){
                 if(currentStack.getCount() == countToRemove){
                     inv.removeStack(i);
-                    countToRemove = 0;
                     return;
                 } else if (currentStack.getCount() > countToRemove){
                     currentStack.setCount(currentStack.getCount() - countToRemove);
