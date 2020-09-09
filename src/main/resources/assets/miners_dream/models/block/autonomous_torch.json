@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_torch",
+  "textures": {
+    "torch": "miners_dream:block/autonomous_torch"
+  }
+}

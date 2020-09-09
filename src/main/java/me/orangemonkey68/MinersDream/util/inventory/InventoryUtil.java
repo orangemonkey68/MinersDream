@@ -4,6 +4,8 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.HashMap;
+
 public class InventoryUtil {
     //Makes class unable to be instantiated
     private InventoryUtil(){}
@@ -36,6 +38,22 @@ public class InventoryUtil {
         }
 
         return stack;
+    }
+
+    public static HashMap<Integer, ItemStack> getAllOfItem(Item item, Inventory inventory){
+        HashMap<Integer, ItemStack> itemStacks = new HashMap<>();
+        for(int i = 0; i < inventory.size(); i++){
+            ItemStack itemStack = inventory.getStack(i);
+            if(itemStack.getItem() == item){
+                itemStacks.put(i, itemStack);
+            }
+        }
+        return  itemStacks;
+    }
+
+    public static HashMap<Integer, ItemStack> getAllOfItem(ItemStack stack, Inventory inventory){
+        Item item = stack.getItem();
+        return getAllOfItem(item, inventory);
     }
 
     public static void removeCountOfItem(int countToRemove, Item item, Inventory inv){

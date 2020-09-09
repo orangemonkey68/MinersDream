@@ -16,5 +16,9 @@
   "chat.miners_dream.too_many_translocation_stones": "You have %d stones in your inventory, but you can only use one.",
   "item.miners_dream.translocation_stone": "Translocation Stone",
   "item.miners_dream.translocation_stone.tooltip_bound": "Bound to %d, %d, %d",
-  "item.miners_dream.translocation_stone.tooltip_unbound": "Not bound"
+  "item.miners_dream.translocation_stone.tooltip_unbound": "Not bound",
+
+  "item.miners_dream.item_void": "Item Void",
+  "item.miners_dream.item_void.tooltip.contains": "Contains %s",
+  "item.miners_dream.item_void.tooltip.binding": "You can bind this to an item by "
 }

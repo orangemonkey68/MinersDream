@@ -35,7 +35,7 @@ public enum ProspectingPickMaterial implements ToolMaterial {
     ProspectingPickMaterial(int miningLevel, int itemDurability, float miningSpeedMultiplier, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient, int radius){
         this.miningLevel = miningLevel;
         this.itemDurability = itemDurability;
-        this. miningSpeedMultiplier = miningSpeedMultiplier;
+        this.miningSpeedMultiplier = miningSpeedMultiplier;
         this.attackDamage = attackDamage;
         this.enchantability = enchantability;
         this.repairIngredient = new Lazy<>(repairIngredient);
